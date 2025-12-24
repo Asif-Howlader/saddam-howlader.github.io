@@ -232,7 +232,7 @@ const App: React.FC = () => {
         {/* FOOTER DASHBOARD */}
         <footer className="mt-32 pt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-end gap-10 opacity-60 hover:opacity-100 transition-opacity">
           <div className="space-y-4">
-            <div className="font-black text-4xl text-white tracking-tighter">Saddam<span className="text-indigo-500">_</span>Howlader</div>
+            <div className="font-black text-4xl text-white tracking-tighter">Saddam<span className="text-indigo-500"></span>Howlader</div>
             <div className="font-mono text-[10px] text-slate-500 leading-relaxed uppercase tracking-widest">
               Digital Artifact v4.0.0 &bull; 2024 Build<br/>
               Security Clearance: Administrator
