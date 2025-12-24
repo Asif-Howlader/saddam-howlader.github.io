@@ -3,7 +3,7 @@ import { PortfolioData } from './types';
 export const portfolioData: PortfolioData = {
   name: "Saddam Howlader",
   title: "IT Officer",
-  profile_image: "https://pbs.twimg.com/profile_images/1176977716110741504/R-9FBsxM_400x400.jpg",
+  profile_image: "https://pbs.twimg.com/media/DYYI_8xUMAElDgs?format=jpg&name=large",
   contact: {
     email: "asifnowlader4@gmail.com",
     phone: "(+880) 1970321576",
