@@ -76,7 +76,7 @@ export const portfolioData: PortfolioData = {
   projects: [
     {
       name: "automated video search, play and download one by one from YouTube",
-      url: "https://github.com/saddamhowlader",
+      url: "https://github.com/Asif-Howlader/youtube_d.git",
       description: "Python-based workflow for media automation and batch processing."
     },
     {
@@ -85,9 +85,9 @@ export const portfolioData: PortfolioData = {
       description: "Real-time packet inspection tool built with Scapy for security monitoring."
     },
     {
-      name: "Automated Server Security Hardening Script",
-      url: "#",
-      description: "Bash/Python utility for fast security baseline deployment on Linux servers."
+      name: "Security Information and Event Management",
+      url: "https://github.com/Asif-Howlader/SIEM.git",
+      description: "Executing the agent script, the mother solution will collect different types of logs."
     }
   ]
 };
