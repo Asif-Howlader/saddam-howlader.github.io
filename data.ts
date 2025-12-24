@@ -25,6 +25,13 @@ export const portfolioData: PortfolioData = {
       period: "2021 – 2022",
       location: "Madaripur, Bangladesh",
       responsibilities: ["Network administration & cybersecurity monitoring", "End-user enterprise technical support"]
+    },
+    {
+      role: "IT Executive",
+      company: "Adorsho Online Network",
+      period: "2019 – 2021",
+      location: "Madaripur, Bangladesh",
+      responsibilities: ["Deployment and monitoring of CCTV and physical security systems", "ISP-level router networking"]
     }
   ],
   education: [
@@ -33,10 +40,28 @@ export const portfolioData: PortfolioData = {
       institution: "Daffodil International University",
       period: "2014 – 2018",
       location: "Dhaka"
+    },
+    {
+      degree: "Diploma in Engineering",
+      institution: "Barishal Polytechnic Institute",
+      period: "2011 – 2014",
+      location: "Barishal"
     }
   ],
   skills: [
-    "Digital Forensics", "Cybersecurity", "Python", "Linux", "Networking", "Burp Suite", "Wireshark", "Metasploit"
+    "Digital Forensics", "Cybersecurity", "Python", "Linux", "Networking", "Burp Suite", "Wireshark", "Metasploit", "Windows Server", "SQL"
+  ],
+  toolsets: [
+    { category: "Security", items: ["Burp Suite", "Wireshark", "Metasploit", "Nmap"] },
+    { category: "Forensics", items: ["Autopsy", "FTK Imager", "Volatility"] }
+  ],
+  training: [
+    { title: "Certified Ethical Hacker", provider: "EC-Council" },
+    { title: "Cisco Certified Network Associate", provider: "Cisco" }
+  ],
+  references: [
+    { name: "Project Manager", role: "Govt ICT Project", contact: "Available on request" },
+    { name: "Senior Engineer", role: "Crystal Tech", contact: "Available on request" }
   ],
   languages: ["Bengali (Native)", "English (Professional)"]
-} as any;
+};
