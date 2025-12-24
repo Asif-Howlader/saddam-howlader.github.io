@@ -80,9 +80,9 @@ export const portfolioData: PortfolioData = {
       description: "Python-based workflow for media automation and batch processing."
     },
     {
-      name: "Network Traffic Analyzer & Intrusion Detection System",
-      url: "#",
-      description: "Real-time packet inspection tool built with Scapy for security monitoring."
+      "name": "Send Email",
+      "url": "https://github.com/Asif-Howlader/email.git",
+      "description": "Send an email to receiver."
     },
     {
       name: "Security Information and Event Management",

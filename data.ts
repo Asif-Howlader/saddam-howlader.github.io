@@ -88,9 +88,9 @@ export const portfolioData: PortfolioData = {
       "description": "Python automation for video searching and sequential downloading."
     },
     {
-      "name": "[Empty Project Slot 02]",
-      "url": "#",
-      "description": "Project documentation pending."
+      "name": "Send Email",
+      "url": "https://github.com/Asif-Howlader/email.git",
+      "description": "Send an email to receiver."
     },
     {
       "name": "Security Information and Event Management",
