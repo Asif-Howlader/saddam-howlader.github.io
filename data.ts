@@ -17,34 +17,14 @@ export const portfolioData: PortfolioData = {
       company: "Bangladesh Government ICT Project",
       period: "2022 – Present",
       location: "Dhaka, Bangladesh",
-      responsibilities: [
-        "Specialized in Infrastructure maintenance & technical support",
-        "Lead Web Application Development and rigorous security testing",
-        "Expertise in Digital Forensics & Incident Response (DFIR)",
-        "Management of high-performance national ICT assets"
-      ]
+      responsibilities: ["Infrastructure maintenance & specialized technical support", "Web App Dev & security testing", "Digital Forensics & Incident Response"]
     },
     {
       role: "Support Engineer",
       company: "CRYSTAL TECHNOLOGY BANGLADESH LTD.",
       period: "2021 – 2022",
       location: "Madaripur, Bangladesh",
-      responsibilities: [
-        "End-to-end network administration and monitoring",
-        "Cybersecurity threat detection and protocol implementation",
-        "Enterprise-level technical support for government departments"
-      ]
-    },
-    {
-      role: "IT Executive",
-      company: "Adorsho Online Network",
-      period: "2019 – 2021",
-      location: "Madaripur, Bangladesh",
-      responsibilities: [
-        "ISP-level infrastructure management and routing",
-        "Surveillance systems deployment and physical security monitoring",
-        "Hardware quality control and inventory management"
-      ]
+      responsibilities: ["Network administration & cybersecurity monitoring", "End-user enterprise technical support"]
     }
   ],
   education: [
@@ -53,16 +33,10 @@ export const portfolioData: PortfolioData = {
       institution: "Daffodil International University",
       period: "2014 – 2018",
       location: "Dhaka"
-    },
-    {
-      degree: "Diploma in Engineering",
-      institution: "Barishal Polytechnic Institute",
-      period: "2011 – 2014",
-      location: "Barishal"
     }
   ],
   skills: [
-    "Digital Forensics", "Cybersecurity", "Network Administration", "Linux/Unix", "Windows Server", "Python", "SQL", "Burp Suite", "Wireshark", "Metasploit", "CCTV Infrastructure"
+    "Digital Forensics", "Cybersecurity", "Python", "Linux", "Networking", "Burp Suite", "Wireshark", "Metasploit"
   ],
   languages: ["Bengali (Native)", "English (Professional)"]
-};
+} as any;

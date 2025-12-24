@@ -3,13 +3,15 @@ import { portfolioData } from './data';
 
 const App: React.FC = () => {
   const [data, setData] = useState<any>(null);
-  const [isDark, setIsDark] = useState<boolean>(false);
+  const [isDark, setIsDark] = useState<boolean>(true);
 
   useEffect(() => {
     const root = window.document.documentElement;
     if (isDark) {
       root.classList.add('dark');
+      root.classList.remove('light');
     } else {
+      root.classList.add('light');
       root.classList.remove('dark');
     }
   }, [isDark]);
@@ -32,166 +34,181 @@ const App: React.FC = () => {
   }, []);
 
   if (!data) return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
+    <div className="h-screen w-full flex items-center justify-center bg-[#050505]">
+      <div className="text-cyan-400 font-mono text-xl animate-pulse tracking-widest">INITIALIZING_SYSTEM...</div>
     </div>
   );
 
+  const profileImg = data.profile_image || data.profileImage;
+
   return (
-    <div className="dark:bg-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-300">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-gray-100 dark:border-slate-800">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex justify-between items-center">
-          <span className="font-bold tracking-tight text-xl uppercase">Saddam<span className="text-blue-600">.</span></span>
-          <button 
-            onClick={() => setIsDark(!isDark)}
-            className="p-2 rounded-lg bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors"
-          >
-            {isDark ? '☀️' : '🌙'}
-          </button>
+    <div className="min-h-screen selection:bg-cyan-500 selection:text-black transition-colors duration-500">
+      
+      {/* HUD HEADER */}
+      <header className="fixed top-0 left-0 w-full z-50 p-4 border-b border-cyan-500/20 bg-black/90 backdrop-blur-xl">
+        <div className="max-w-[1600px] mx-auto flex justify-between items-center">
+          <div className="flex items-center gap-6">
+            <div className="relative group cursor-crosshair">
+              <div className="w-12 h-12 border-2 border-cyan-500 flex items-center justify-center bg-cyan-500/10">
+                <span className="text-cyan-400 font-black text-xl tracking-tighter animate-pulse">SH</span>
+              </div>
+              <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-cyan-500"></div>
+              <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-cyan-500"></div>
+            </div>
+            <div className="hidden md:block">
+              <div className="text-[10px] text-cyan-500 font-bold tracking-[0.4em] uppercase opacity-60">Identity::Forensics_Specialist</div>
+              <div className="text-sm font-bold uppercase tracking-widest text-white/90">{data.name}</div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-8">
+            <div className="hidden lg:flex items-center gap-6 text-[10px] font-bold text-zinc-500">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 bg-green-500 rounded-full shadow-[0_0_10px_#22c55e] animate-ping"></span>
+                UPLINK_STABLE
+              </div>
+              <div className="h-4 w-px bg-zinc-800"></div>
+              <div className="font-mono">NODE: DHAKA_BD</div>
+            </div>
+
+            <button 
+              onClick={() => setIsDark(!isDark)}
+              className="flex items-center gap-3 border border-cyan-500/40 px-5 py-2 hover:bg-cyan-500 hover:text-black transition-all group font-bold text-[10px] uppercase tracking-widest"
+            >
+              <span className="group-hover:text-black text-cyan-400">{isDark ? 'Stealth' : 'Light'}</span>
+              <div className={`w-3 h-3 border border-cyan-500 ${isDark ? 'bg-cyan-500' : 'bg-transparent'}`}></div>
+            </button>
+          </div>
         </div>
-      </nav>
+      </header>
 
-      <div className="max-w-6xl mx-auto px-6 pt-32 pb-24">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-          
-          {/* Sidebar */}
-          <aside className="lg:col-span-4 space-y-12">
-            <div className="text-center lg:text-left">
-              <div className="relative inline-block mb-6">
-                <img 
-                  src={data.profile_image} 
-                  alt={data.name} 
-                  className="w-48 h-48 rounded-2xl object-cover shadow-2xl border-4 border-white dark:border-slate-800"
-                />
-                <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-blue-600 rounded-full border-4 border-white dark:border-slate-800 flex items-center justify-center">
-                  <span className="w-2 h-2 bg-white rounded-full animate-ping"></span>
-                </div>
-              </div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white leading-tight">{data.name}</h1>
-              <p className="text-blue-600 font-medium text-lg mt-1">{data.title}</p>
+      <main className="max-w-[1400px] mx-auto px-6 lg:px-12 pt-44 pb-32">
+        
+        {/* HERO */}
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-48 items-center">
+          <div className="lg:col-span-8">
+            <div className="inline-flex items-center gap-3 px-4 py-1.5 border border-cyan-500/30 bg-cyan-500/5 text-[10px] text-cyan-400 font-bold uppercase mb-12">
+              <span className="w-2 h-2 bg-magenta-500 rounded-full bg-pink-500"></span> CMD: whoami --profile
             </div>
-
-            <div className="space-y-6">
-              <h2 className="text-xs font-bold text-gray-400 uppercase tracking-widest border-b border-gray-100 dark:border-slate-800 pb-2">Connect</h2>
-              <div className="space-y-4 text-sm font-medium">
-                <a href={`mailto:${data.contact.email}`} className="flex items-center gap-3 text-gray-600 dark:text-slate-400 hover:text-blue-600 transition-colors group">
-                  <div className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-slate-800 flex items-center justify-center group-hover:bg-blue-500/10 transition-colors">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                  </div>
-                  {data.contact.email}
-                </a>
-                <div className="flex items-center gap-3 text-gray-600 dark:text-slate-400">
-                  <div className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-slate-800 flex items-center justify-center">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                  </div>
-                  {data.contact.phone}
-                </div>
-                <div className="flex items-start gap-3 text-gray-600 dark:text-slate-400">
-                  <div className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-slate-800 flex items-center justify-center shrink-0">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                  </div>
-                  <span className="leading-tight">{data.contact.address}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              <h2 className="text-xs font-bold text-gray-400 uppercase tracking-widest border-b border-gray-100 dark:border-slate-800 pb-2">Linguistic Profile</h2>
-              <div className="grid grid-cols-1 gap-3">
-                {data.languages.map((lang: string, i: number) => (
-                  <div key={i} className="flex justify-between items-center text-xs font-semibold uppercase tracking-wider">
-                    <span className="text-gray-700 dark:text-slate-300">{lang.split(' ')[0]}</span>
-                    <span className="text-blue-500">{lang.split(' ')[1]?.replace('(', '').replace(')', '') || 'Fluent'}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </aside>
-
-          {/* Main Content */}
-          <main className="lg:col-span-8 space-y-24">
             
-            {/* About */}
-            <section>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white section-heading mb-8">Professional Summary</h2>
-              <p className="text-lg text-gray-600 dark:text-slate-400 leading-relaxed">
-                Strategic IT Professional with a focused background in <span className="text-blue-600 font-bold">Digital Forensics</span> and 
-                <span className="text-blue-600 font-bold"> Cybersecurity</span>. 
-                Dedicated to fortifying ICT infrastructure and implementing advanced security protocols. 
-                Currently managing critical government technology assets in Bangladesh.
-              </p>
-            </section>
+            <h1 className="font-display text-7xl md:text-[8.5rem] font-black leading-[0.8] uppercase tracking-tighter mb-10">
+              <span className="block hover:text-cyan-400 transition-colors cursor-default">CYBER</span>
+              <span className="text-cyan-400 block">ARCHITECT</span>
+            </h1>
 
-            {/* Experience */}
-            <section>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white section-heading mb-12">Professional Experience</h2>
-              <div className="space-y-16">
-                {data.experience.map((exp: any, i: number) => (
-                  <div key={i} className="group relative">
-                    <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
-                      <div>
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors">{exp.role}</h3>
-                        <p className="text-blue-600 font-semibold uppercase text-xs tracking-widest mt-1">{exp.company}</p>
+            <p className="text-xl md:text-2xl text-zinc-400 font-light leading-relaxed mb-16 max-w-2xl border-l-2 border-cyan-500/30 pl-8">
+              Strategic <span className="text-white font-bold">{data.title}</span> specializing in 
+              <span className="text-pink-500 font-bold"> Digital Forensics</span> and 
+              <span className="text-white font-bold"> National ICT Infrastructure</span>.
+            </p>
+
+            <div className="flex flex-wrap gap-12">
+              <div className="flex flex-col">
+                <span className="text-[10px] text-zinc-600 font-bold uppercase tracking-[0.3em] mb-3">Origin_Point</span>
+                <span className="text-sm font-bold uppercase tracking-widest text-zinc-300">Dhaka // Bangladesh</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-zinc-600 font-bold uppercase tracking-[0.3em] mb-3">Secure_Contact</span>
+                <a href={`mailto:${data.contact.email}`} className="text-sm font-bold uppercase text-cyan-400 hover:text-white transition-colors underline underline-offset-8 decoration-cyan-500/30">{data.contact.email}</a>
+              </div>
+            </div>
+          </div>
+
+          <div className="lg:col-span-4 relative group">
+            <div className="cyber-border p-2 bg-black/50 cyber-cut relative overflow-hidden">
+              <div className="absolute inset-0 bg-cyan-500/5 group-hover:bg-cyan-500/10 transition-all"></div>
+              <img 
+                src={profileImg} 
+                alt={data.name} 
+                className="w-full aspect-square object-cover grayscale mix-blend-lighten contrast-125 brightness-110 opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700"
+              />
+              <div className="absolute top-4 left-4 text-[9px] font-mono text-cyan-400/60 bg-black/80 px-2 py-1">SCAN_ID_SADDAM</div>
+              <div className="absolute bottom-4 right-4 text-right">
+                <div className="text-[10px] font-mono text-cyan-400 font-bold tracking-widest">UID_{Math.floor(Math.random() * 9999)}</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* EXPERIENCE */}
+        <section className="mb-48">
+          <div className="flex items-center gap-6 mb-24">
+            <div className="text-pink-500 font-black text-xs uppercase tracking-[0.8em]">Deployment_History</div>
+            <div className="h-px flex-1 bg-gradient-to-r from-pink-500/50 to-transparent"></div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+            <div className="lg:col-span-12 space-y-20">
+              {data.experience.map((exp: any, i: number) => (
+                <div key={i} className="group relative border-l-2 border-zinc-800 pl-12 hover:border-pink-500 transition-colors">
+                  <div className="absolute -left-2 top-0 w-3.5 h-3.5 bg-black border-2 border-zinc-700 group-hover:border-pink-500 transition-all"></div>
+                  
+                  <div className="flex flex-col md:flex-row justify-between items-start gap-6 mb-8">
+                    <div>
+                      <h3 className="text-3xl md:text-4xl font-bold uppercase tracking-tighter text-white mb-2 group-hover:text-cyan-400 transition-colors">{exp.role}</h3>
+                      <p className="text-xs font-black text-pink-500 uppercase tracking-[0.4em]">{exp.company}</p>
+                    </div>
+                    <span className="text-xs font-mono text-zinc-500 font-bold px-3 py-1 bg-zinc-900 border border-zinc-800">{exp.period}</span>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-8 max-w-5xl">
+                    {exp.responsibilities.map((res: string, j: number) => (
+                      <div key={j} className="text-sm text-zinc-400 leading-relaxed flex gap-4 group/item">
+                        <span className="text-cyan-400 font-black shrink-0 transition-all group-hover/item:translate-x-1">_</span>
+                        {res}
                       </div>
-                      <div className="text-xs font-bold text-gray-400 uppercase tracking-widest md:text-right mt-2 md:mt-0">
-                        {exp.period} <br className="hidden md:block" /> {exp.location}
-                      </div>
-                    </div>
-                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3">
-                      {exp.responsibilities.map((resp: string, j: number) => (
-                        <li key={j} className="text-sm text-gray-600 dark:text-slate-400 flex items-start gap-3">
-                          <span className="text-blue-600 mt-1">•</span>
-                          {resp}
-                        </li>
-                      ))}
-                    </ul>
+                    ))}
                   </div>
-                ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* SKILLS */}
+        <section className="mb-48">
+          <div className="flex items-center gap-6 mb-24">
+            <div className="text-green-500 font-black text-xs uppercase tracking-[0.8em]">Technical_Skill_Index</div>
+            <div className="h-px flex-1 bg-gradient-to-r from-green-500/50 to-transparent"></div>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {data.skills.map((skill: string, i: number) => (
+              <div key={i} className="cyber-border p-8 bg-zinc-900/20 group hover:bg-green-500/5 transition-all flex flex-col justify-between h-44">
+                <div className="flex justify-between items-start">
+                  <span className="text-[9px] font-mono text-zinc-600 uppercase tracking-widest">MOD_{i.toString().padStart(2, '0')}</span>
+                  <div className="w-1.5 h-6 bg-green-500/20 group-hover:bg-green-500 transition-all shadow-[0_0_10px_#22c55e]"></div>
+                </div>
+                <h4 className="text-lg font-bold uppercase tracking-widest group-hover:text-white transition-all leading-tight">{skill}</h4>
+                <div className="w-full h-1 bg-zinc-800 overflow-hidden">
+                  <div className="h-full bg-green-500/40 w-4/5 group-hover:w-full transition-all duration-1000"></div>
+                </div>
               </div>
-            </section>
+            ))}
+          </div>
+        </section>
 
-            {/* Technical Skills */}
-            <section>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white section-heading mb-10">Technical Skill Index</h2>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                {data.skills.map((skill: string, i: number) => (
-                  <div key={i} className="p-4 bg-gray-100 dark:bg-slate-800 rounded-xl hover:bg-blue-600 hover:text-white transition-all text-sm font-bold uppercase tracking-wide text-center">
-                    {skill}
-                  </div>
-                ))}
-              </div>
-            </section>
+        {/* CONTACT FOOTER */}
+        <section className="text-center py-20 border-t border-zinc-800">
+          <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-12">
+            INITIATE <span className="text-cyan-400">UPLINK</span>
+          </h2>
+          <div className="flex flex-wrap justify-center gap-8">
+             <a href={`mailto:${data.contact.email}`} className="px-10 py-4 bg-cyan-500 text-black font-black uppercase tracking-widest hover:bg-white transition-all">Send_Message</a>
+             <a href={`https://${data.contact.linkedin}`} target="_blank" className="px-10 py-4 border border-cyan-500 text-cyan-400 font-black uppercase tracking-widest hover:bg-cyan-500/10 transition-all">Connect_LinkedIn</a>
+          </div>
+        </section>
 
-            {/* Education */}
-            <section>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white section-heading mb-10">Academic Background</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {data.education.map((edu: any, i: number) => (
-                  <div key={i} className="p-6 border border-gray-100 dark:border-slate-800 rounded-2xl bg-white dark:bg-slate-900/50 shadow-sm">
-                    <div className="w-10 h-10 bg-blue-50 dark:bg-blue-500/10 rounded-lg flex items-center justify-center text-blue-600 mb-4">
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path></svg>
-                    </div>
-                    <h3 className="font-bold text-gray-900 dark:text-white text-lg leading-tight">{edu.degree}</h3>
-                    <p className="text-gray-500 dark:text-slate-400 text-sm mt-1">{edu.institution}</p>
-                    <div className="flex justify-between items-center mt-6 pt-4 border-t border-gray-50 dark:border-slate-800 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                      <span>{edu.location}</span>
-                      <span className="text-blue-600">{edu.period}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
+      </main>
 
-          </main>
-        </div>
-      </div>
-
-      <footer className="border-t border-gray-100 dark:border-slate-800 py-12 mt-12 bg-gray-50 dark:bg-slate-900/50">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <p className="text-xs text-gray-400 dark:text-slate-500 font-bold uppercase tracking-[0.4em]">
-            &copy; {new Date().getFullYear()} Saddam Howlader • Secured Infrastructure Baseline
-          </p>
+      {/* FOOTER BAR */}
+      <footer className="fixed bottom-0 left-0 w-full p-4 border-t border-zinc-800 bg-black/95 backdrop-blur-md z-50">
+        <div className="max-w-[1600px] mx-auto flex justify-between items-center text-[10px] font-mono text-zinc-600 uppercase tracking-widest">
+           <span>SADDAM_HOWLADER // OS_V6.1</span>
+           <div className="flex gap-8">
+              <span className="text-cyan-500 animate-pulse">SYSTEM_ONLINE</span>
+              <span className="hidden sm:block">2024_UTC</span>
+           </div>
         </div>
       </footer>
     </div>
